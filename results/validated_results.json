@@ -1,0 +1,32 @@
+{
+  "metadata": {"seed": 2025, "dataset": "WikiText-2", "hardware": "T4 GPU", "sc": 0.769893},
+  "main_results": [
+    {"model": "Qwen2.5-1.5B-Instruct", "config": "sanctuary=8 8b/3b",
+     "cosine": 0.99406, "top1_pct": 88, "ppl_fp16": 13.35, "ppl_q": 13.45,
+     "delta_ppl": 0.09, "gain_kv": 3.61, "tps_fp16": 15.6, "tps_q": 15.7},
+    {"model": "SmolLM2-1.7B-Instruct", "config": "sanctuary=8 8b/3b",
+     "delta_ppl": 0.62, "cosine": 0.988, "gain_kv": 3.43,
+     "note": "sanctuary=0 also viable: delta_ppl=+0.71, gain=5.33x"}
+  ],
+  "awq_stacking": {
+    "model": "Qwen2.5-1.5B-Instruct", "context_tokens": 8192,
+    "memory_fp16_mb": 3322, "memory_4bit_kv_fp16_mb": 1007,
+    "memory_4bit_kv_resapex_mb": 837, "gain_total": 3.97,
+    "additional_delta_ppl": 0.20, "compression_speedup_vs_numpy": 17.8
+  },
+  "sanctuary_sweep_qwen_r6": [
+    {"sanctuary": 0, "delta_ppl": 3868.05, "gain": 5.33},
+    {"sanctuary": 2, "delta_ppl": 0.58, "gain": 4.77},
+    {"sanctuary": 3, "delta_ppl": 0.26, "gain": 4.53},
+    {"sanctuary": 8, "delta_ppl": 0.01, "gain": 3.61}
+  ],
+  "sanctuary_sweep_llama_r1": [
+    {"sanctuary": 0, "delta_ppl": 0.71, "gain": 5.33},
+    {"sanctuary": 8, "delta_ppl": 0.62, "gain": 3.43}
+  ],
+  "rejected_hypotheses": [
+    {"hypothesis": "Smooth gamma transition", "delta_ppl": 12.67, "status": "rejected"},
+    {"hypothesis": "sqrt(Sc) Bloch threshold", "delta_ppl": 0.18, "status": "rejected"},
+    {"hypothesis": "Sc_local without 3*median", "delta_ppl": 7.48, "status": "rejected"}
+  ]
+}
